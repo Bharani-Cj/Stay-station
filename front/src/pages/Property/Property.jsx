@@ -76,9 +76,7 @@ const Property = () => {
             <div className="flexStart" style={{ gap: "1rem" }}>
               <MdLocationPin size={25} />
               <span className="secondaryText">
-                {data.residency.address}
-                {data.residency.city}
-                {data.residency.country}
+                {data.residency.address}, {data.residency.city}, {data.residency.country}
               </span>
             </div>
 
