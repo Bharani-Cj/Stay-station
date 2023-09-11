@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 export const getAllProperties = async () => {
   try {
-    const response = await axios.get("http://127.0.0.1:5000/api/v1/residency/getAllResidency", {
+    const response = await axios.get("https://stay-station.onrender.com/api/v1/residency/getAllResidency", {
       timeout: 10 * 1000,
     });
     return response.data;
@@ -15,7 +15,7 @@ export const getAllProperties = async () => {
 
 export const getProperty = async (id) => {
   try {
-    const response = await axios.get(`http://127.0.0.1:5000/api/v1/residency/getResidency/${id}`, {
+    const response = await axios.get(`https://stay-station.onrender.com/api/v1/residency/getResidency/${id}`, {
       timeout: 10 * 1000,
     });
     return response.data;
