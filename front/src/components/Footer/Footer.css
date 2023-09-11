@@ -1,6 +1,10 @@
+.f-wrapper {
+   margin: 150px 0 100px 0;
+}
+
 .f-container {
    justify-content: space-between;
-   border-top: .5px solid rgba(0, 0, 0, 0.148)
+   border-top: 5px solid rgba(0, 0, 0, 0.148);
 }
 
 .f-left {

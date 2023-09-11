@@ -1,10 +1,10 @@
 .h-wrapper {
    color: white;
+   background-color: var(--black);
 }
 
 .h-container {
    justify-content: space-between;
-   padding: 1rem 0;
    color: var(--secondary);
 }
 
@@ -16,10 +16,16 @@
    gap: 2rem;
 }
 
+.h-menu a:hover {
+   color: var(--blue);
+}
+
+/* [HandBurger] for responsive */
 .menu-icon {
    display: none;
 }
 
+/* Media For Tab and mobiles */
 @media (max-width: 768px) {
    .menu-icon {
       display: block;

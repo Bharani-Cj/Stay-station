@@ -2,17 +2,20 @@ import { useState } from "react";
 import { BiMenuAltRight } from "react-icons/bi";
 import OutsideClickHandler from "react-outside-click-handler";
 import { getMenuStyles } from "../../utils/common";
+import { Link, NavLink } from "react-router-dom";
 
 import "./Header.css";
 
 // eslint-disable-next-line react/prop-types
-function Header({ setLoginClick }) {
+function Header() {
   const [menuOpened, setMenuOpened] = useState(false);
 
   return (
-    <section className="h-wrapper">
-      <div className="h-container flexCenter paddings innerWidth">
-        <img src="img/logo.png" alt="Logo" />
+    <section className="h-wrapper paddings">
+      <div className="h-container flexCenter  innerWidth">
+        <Link to="/">
+          <img src="img/logo.png" alt="Logo" />
+        </Link>
 
         <OutsideClickHandler
           onOutsideClick={() => {
@@ -20,12 +23,10 @@ function Header({ setLoginClick }) {
           }}
         >
           <div className="h-menu flexCenter" style={getMenuStyles(menuOpened)}>
+            <NavLink to="/properties">Properties</NavLink>
             <a href="1">Add property</a>
-            <a href="2">Property</a>
-            <a href="3">Contact</a>
-            <button className="button" onClick={() => setLoginClick(true)}>
-              login
-            </button>
+            <a href="mailto:cj.bharani@gmail.com">Contact</a>
+            <button className="button">Login</button>
           </div>
         </OutsideClickHandler>
 

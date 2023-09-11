@@ -1,7 +1,7 @@
 import "./Hero.css";
-import { HiLocationMarker } from "react-icons/hi";
 import CountUp from "react-countup";
 import { motion } from "framer-motion";
+import SearchBar from "./../SearchBar/SearchBar";
 
 const Hero = () => {
   return (
@@ -11,27 +11,15 @@ const Hero = () => {
         <div className="flexColStart hero-left">
           <div className="hero-title">
             <div className="orange-circle"></div>
-            <motion.h1
-              initial={{ y: "2rem", opacity: 0 }}
-              animate={{ y: "0rem", opacity: 1 }}
-              transition={{ duration: 2, type: "spring" }}
-            >
+            <motion.h1 initial={{ y: "2rem", opacity: 0 }} animate={{ y: "0rem", opacity: 1 }} transition={{ duration: 2, type: "spring" }}>
               Discover <br /> Most Suitable <br /> Property
             </motion.h1>
           </div>
           <div className="flexColStart hero-des">
-            <span className="secondaryText">
-              Find a variety of properties that suit you very easilty
-            </span>
-            <span className="secondaryText">
-              Forget all difficulties in finding a residence for you
-            </span>
+            <span className="secondaryText">Find a variety of properties that suit you very easilty</span>
+            <span className="secondaryText">Forget all difficulties in finding a residence for you</span>
           </div>
-          <div className="flexCenter search-bar">
-            <HiLocationMarker color="blue" size={25} />
-            <input type="text" />
-            <button className="button">Search</button>
-          </div>
+          <SearchBar name="Search" width="100%" />
           <div className="flexCenter stats">
             <div className="flexColCenter stat">
               <span>
@@ -59,12 +47,7 @@ const Hero = () => {
 
         {/* right side */}
         <div className="hero-right">
-          <motion.div
-            className="image-container"
-            initial={{ x: "5rem", opacity: 0 }}
-            animate={{ x: "0rem", opacity: 1 }}
-            transition={{ duration: 2, type: "spring" }}
-          >
+          <motion.div className="image-container" initial={{ x: "5rem", opacity: 0 }} animate={{ x: "0rem", opacity: 1 }} transition={{ duration: 2, type: "spring" }}>
             <img src="./img/hero-image.png" alt="heroImg" />
           </motion.div>
         </div>

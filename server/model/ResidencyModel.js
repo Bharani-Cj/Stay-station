@@ -2,24 +2,31 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 
 const residencySchema = mongoose.Schema({
-  title: String,
-
-  description: String,
-
-  price: Number,
-
+  title: {
+    type: String,
+    required: [true, `Please provide a title`],
+  },
+  description: {
+    type: String,
+    required: [true, `Please provide a description`],
+  },
+  price: {
+    type: Number,
+    required: [true, `Please provide a price`],
+  },
   address: {
     type: String,
     unique: true,
   },
+  country: {
+    type: String,
+    required: [true, `Please provide a country`],
+  },
+
   city: String,
 
-  country: String,
-
   image: String,
-
-  facilities: Array,
-
+  facilities: Object,
   owner: {
     type: mongoose.Schema.ObjectId,
     ref: "User",

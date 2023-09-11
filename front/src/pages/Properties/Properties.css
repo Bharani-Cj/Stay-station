@@ -1,0 +1,17 @@
+.wrapper .prop-container {
+   width: 100%;
+}
+
+.wrapper .prop-container .search-bar {
+   width: 40vw;
+}
+
+.wrapper .prop-container .properties {
+   width: 100%;
+}
+
+@media (max-width:800px) {
+   .wrapper .prop-container {
+      width: 80vw;
+   }
+}

@@ -16,7 +16,7 @@ app.use("/api/v1/users", userRouter);
 app.use("/api/v1/residency", residencyRouter);
 
 app.all("*", (req, res, next) => {
-  return next(new APIError("Route Not Found", 404));
+  return next(new APIError("Route Not Found", 401));
 });
 
 app.use(globalErrorHandler);
