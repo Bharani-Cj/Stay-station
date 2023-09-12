@@ -8,9 +8,7 @@ const api = axios.create({
 });
 export const getAllProperties = async () => {
   try {
-    const response = await api.get("/api/v1/residency/getAllResidency", {
-      timeout: 10 * 1000,
-    });
+    const response = await api.get("/api/v1/residency/getAllResidency");
     console.log(response);
     return response.data;
   } catch (error) {
@@ -20,9 +18,7 @@ export const getAllProperties = async () => {
 
 export const getProperty = async (id) => {
   try {
-    const response = await api.get(`/api/v1/residency/getResidency/${id}`, {
-      timeout: 10 * 1000,
-    });
+    const response = await api.get(`/api/v1/residency/getResidency/${id}`);
     return response.data;
   } catch (error) {
     toast.error(`Backend is hosted on a free domain, try reloading page again🥲`);
