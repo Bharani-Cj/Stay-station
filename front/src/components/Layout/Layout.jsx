@@ -6,6 +6,7 @@ import LoginAndSignup from "./../LoginAndSignup/LoginAndSignup";
 
 const Layout = () => {
   const [loginClick, setLoginClick] = useState(false);
+
   return (
     <>
       <Header setLoginClick={setLoginClick} />
