@@ -16,8 +16,6 @@ const LoginAndSignup = ({ setLoginClick }) => {
   const [signUpData, setSignUpData] = useState(signUpInitialState);
   const { name, email, password } = signUpData;
 
-  // const [chooseImg, setChooseImg] = useState("");
-
   // window scroll
   useEffect(() => {
     function handleScroll() {
