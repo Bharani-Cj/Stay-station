@@ -29,14 +29,15 @@ exports.protectRoutes = catchAsync(async (req, res, next) => {
 });
 
 exports.signup = catchAsync(async (req, res, next) => {
-  const { password, email } = req.body;
-  if (!password || !email) next(new APIError("Please Provide the valid Credintials", 401));
+  const { name, password, email } = req.body;
+  if (!password || !email || !name) next(new APIError("Please Provide the valid Credintials", 401));
 
   let user;
+
   if (!(await userModel.findOne({ email }))) {
     user = await userModel.create(req.body);
     const token = jwtSign(user._id);
-    if (!token) next(new APIError("Internal server ERROR", 400));
+    if (!token) return next(new APIError("Internal server ERROR", 400));
 
     res.cookie("jwt", token, {
       expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),

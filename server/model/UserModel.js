@@ -19,14 +19,17 @@ const userSchema = mongoose.Schema({
     type: String,
     required: [true, "Password is required field"],
   },
+
   image: {
     type: String,
   },
+
   bookedVisits: Array,
 
   favResidenciesID: [
     {
       type: mongoose.Schema.ObjectId,
+      ref: "Residency",
     },
   ],
 

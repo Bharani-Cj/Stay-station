@@ -7,7 +7,7 @@ import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
 
 // eslint-disable-next-line react/prop-types
-function Header() {
+function Header({ setLoginClick }) {
   const [menuOpened, setMenuOpened] = useState(false);
 
   return (
@@ -26,7 +26,9 @@ function Header() {
             <NavLink to="/properties">Properties</NavLink>
             <a href="1">Add property</a>
             <a href="mailto:cj.bharani@gmail.com">Contact</a>
-            <button className="button">Login</button>
+            <button className="button" onClick={() => setLoginClick(true)}>
+              Login
+            </button>
           </div>
         </OutsideClickHandler>
 

@@ -4,7 +4,6 @@ import Residencies from "../../components/Residencies/Residencies";
 import Value from "../../components/Value/Value";
 import Contact from "./../../components/Contact/Contact";
 import GetStarted from "../../components/GetStarted/GetStarted";
-// import LoginAndSignup from "../components/LoginAndSignup/LoginAndSignup";
 
 function Home() {
   return (
@@ -23,8 +22,3 @@ function Home() {
 }
 
 export default Home;
-
-// eslint-disable-next-line no-lone-blocks
-{
-  /* {loginClick && <LoginAndSignup setLoginClick={setLoginClick} />} */
-}

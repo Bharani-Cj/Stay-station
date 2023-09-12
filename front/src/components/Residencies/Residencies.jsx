@@ -32,7 +32,7 @@ const Residencies = () => {
         </div>
         <Swiper {...sliderSettings}>
           <SliderButtons />
-          {data.residency.slice(0, 8).map((card, i) => (
+          {data?.residency?.slice(0, 8).map((card, i) => (
             <SwiperSlide key={i}>
               <PropertyCard card={card} /> {/* component */}
             </SwiperSlide>

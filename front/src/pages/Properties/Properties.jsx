@@ -6,6 +6,7 @@ import PropertyCard from "../../components/PropertyCard/PropertyCard";
 
 const Properties = () => {
   const { data, isError, isLoading } = useProperties();
+  const resi = data?.residency;
 
   if (isError) {
     return (
@@ -23,16 +24,22 @@ const Properties = () => {
   }
 
   return (
-    <div className="wrapper paddings flexCenter">
-      <div className="prop-container">
-        <SearchBar name="Search" margin="25px auto" />
-        <div className="properties flexCenter properties">
-          {data?.residency?.map((el, index) => (
-            <PropertyCard card={el} key={index} />
-          ))}
+    <>
+      {data ? (
+        <div className="wrapper paddings flexCenter">
+          <div className="prop-container">
+            <SearchBar name="Search" margin="25px auto" />
+            <div className="properties flexCenter properties">
+              {resi?.map((el, index) => (
+                <PropertyCard card={el} key={index} />
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      ) : (
+        <p> Something went wrong</p>
+      )}
+    </>
   );
 };
 

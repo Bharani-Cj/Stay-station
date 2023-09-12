@@ -12,6 +12,7 @@ import { MdMeetingRoom, MdLocationPin } from "react-icons/md";
 const Property = () => {
   const { propertyId } = useParams();
   const { data, isError, isLoading } = useQuery(["resd", propertyId], () => getProperty(propertyId));
+
   if (isError) {
     return (
       <div className="wrapper">
@@ -41,14 +42,14 @@ const Property = () => {
         </div>
 
         {/* image */}
-        <img src={data.residency.image} alt="images" />
+        <img src={data?.residency?.image} alt="images" />
         <div className="flexCenter property-details">
           {/* left */}
           <div className="flexColStart left">
             {/* head */}
             <div className="flexStart head">
-              <span className="primaryText"> {data.residency.title} </span>
-              <span className="orangeText"> $ {data.residency.price} </span>
+              <span className="primaryText"> {data?.residency?.title} </span>
+              <span className="orangeText"> $ {data?.residency?.price} </span>
             </div>
 
             {/* facilities */}
@@ -69,14 +70,14 @@ const Property = () => {
 
             {/* description */}
             <span className="secondaryText" style={{ textAlign: "justify" }}>
-              {data.residency.description}
+              {data?.residency?.description}
             </span>
 
             {/* address */}
             <div className="flexStart" style={{ gap: "1rem" }}>
               <MdLocationPin size={25} />
               <span className="secondaryText">
-                {data.residency.address}, {data.residency.city}, {data.residency.country}
+                {data?.residency?.address}, {data?.residency?.city}, {data?.residency?.country}
               </span>
             </div>
 
