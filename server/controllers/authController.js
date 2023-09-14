@@ -57,7 +57,6 @@ exports.signup = catchAsync(async (req, res, next) => {
 
 exports.logIn = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
-  console.log(email, password);
 
   if (!email || !password) next(new APIError("Please enter the Valid password", 400));
 
