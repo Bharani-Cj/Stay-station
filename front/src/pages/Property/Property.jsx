@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Property.css";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
@@ -8,11 +8,15 @@ import { AiFillHeart } from "react-icons/ai";
 import { FaShower } from "react-icons/fa";
 import { AiTwotoneCar } from "react-icons/ai";
 import { MdMeetingRoom, MdLocationPin } from "react-icons/md";
+import { toast } from "react-toastify";
+import BookingProperty from "../../components/BookingProperty/BookingProperty";
 
 const Property = () => {
   const { propertyId } = useParams();
-  const { data, isError, isLoading } = useQuery(["resd", propertyId], () => getProperty(propertyId));
-
+  const { data, isError, isLoading } = useQuery(["resd", propertyId], () =>
+    getProperty(propertyId)
+  );
+  const [modalBook, setModalBook] = useState(false);
   if (isError) {
     return (
       <div className="wrapper">
@@ -22,7 +26,6 @@ const Property = () => {
       </div>
     );
   }
-
   if (isLoading) {
     return (
       <div className="wrapper flexCenter">
@@ -82,7 +85,22 @@ const Property = () => {
             </div>
 
             {/* button */}
-            <button className="button">Book Now </button>
+            <button
+              className="button"
+              onClick={() => {
+                !window.localStorage.getItem("user")
+                  ? toast.error("please Login")
+                  : setModalBook(true);
+              }}
+            >
+              Book Now
+            </button>
+            <BookingProperty
+              opened={modalBook}
+              setOpened={setModalBook}
+              propertyId={data?.residency?._id}
+              email={window.localStorage.getItem("user")}
+            />
           </div>
         </div>
       </div>

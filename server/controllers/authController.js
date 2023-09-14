@@ -48,6 +48,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     res.status(200).json({
       status: "ok",
       token,
+      user,
     });
   } else {
     return next(new APIError("User already exists", 201));
@@ -56,8 +57,9 @@ exports.signup = catchAsync(async (req, res, next) => {
 
 exports.logIn = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
+  console.log(email, password);
 
-  if (!email || !password) next(new APIError("No user found", 400));
+  if (!email || !password) next(new APIError("Please enter the Valid password", 400));
 
   const user = await userModel.findOne({ email });
 
@@ -75,5 +77,33 @@ exports.logIn = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: "sucesses",
     token,
+    user,
+  });
+});
+
+exports.bookVisit = catchAsync(async (req, res, next) => {
+  const { email, id, date } = req.body;
+  const arr = { id, date };
+
+  const user = await userModel.findOne({ email });
+
+  let booked = false;
+  user.bookedVisits.find((el, index) => {
+    if (el.date === date) {
+      booked = true;
+    }
+  });
+
+  if (booked) return next(new APIError("You have alread booked this vaccation", 401));
+  const updatedUser = await userModel.findOneAndUpdate(
+    { email },
+    { bookedVisits: [...user.bookedVisits, arr] },
+    { new: true }
+  );
+
+  if (!user) return next(new APIError("No user Updated", 401));
+  res.status(200).json({
+    status: "sucesses",
+    updatedUser,
   });
 });

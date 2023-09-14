@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./LoginAndSignup.css";
 import OutsideClickHandler from "react-outside-click-handler";
-import { signUp } from "../../utils/api";
+import { signIn, signUp } from "../../utils/api";
 import { toast } from "react-toastify";
 
 const signUpInitialState = {
@@ -15,7 +15,6 @@ const LoginAndSignup = ({ setLoginClick }) => {
 
   const [signUpData, setSignUpData] = useState(signUpInitialState);
   const { name, email, password } = signUpData;
-
   // window scroll
   useEffect(() => {
     function handleScroll() {
@@ -33,11 +32,20 @@ const LoginAndSignup = ({ setLoginClick }) => {
     setSignUpData({ ...signUpData, [name]: value });
   }
   // submitSignUp
-  async function handleSignUp(e) {
+  async function handleSignUpSubmit(e) {
     e.preventDefault();
     const data = await signUp(signUpData);
     if (!data.token) return toast.error("something went wrong");
     setLoginClick(false);
+    window.localStorage.setItem("user", data?.user.email);
+  }
+
+  async function handleSingInSubmit(e) {
+    e.preventDefault();
+    const data = await signIn(signUpData);
+    if (!data.token) return toast.error("something went wrong");
+    setLoginClick(false);
+    window.localStorage.setItem("user", data?.user.email);
   }
 
   return (
@@ -50,45 +58,56 @@ const LoginAndSignup = ({ setLoginClick }) => {
         <div className={toggleSign ? "container right-panel-active" : "container"} id="container">
           {/* Signup container */}
           <div className="form-container sign-up-container">
-            <form onSubmit={handleSignUp}>
+            <form onSubmit={handleSignUpSubmit}>
               <h1>Create Account</h1>
-              <div className="social-container">
-                <a href="2" className="social">
-                  <i className="fab fa-facebook-f"></i>
-                </a>
-                <a href="1" className="social">
-                  <i className="fab fa-google-plus-g"></i>
-                </a>
-                <a href="1" className="social">
-                  <i className="fab fa-linkedin-in"></i>
-                </a>
-              </div>
-              <span>or use your email for registration</span>
-              <input type="text" placeholder="Name.." name="name" value={name} onChange={handleSignUpChange} required />
-              <input type="email" placeholder="Email.." name="email" value={email} onChange={handleSignUpChange} required />
-              <input type="password" placeholder="Password.." name="password" value={password} onChange={handleSignUpChange} required />
+              <input
+                type="text"
+                placeholder="Name.."
+                name="name"
+                value={name}
+                onChange={handleSignUpChange}
+                required
+              />
+              <input
+                type="email"
+                placeholder="Email.."
+                name="email"
+                value={email}
+                onChange={handleSignUpChange}
+                required
+              />
+              <input
+                type="password"
+                placeholder="Password.."
+                name="password"
+                value={password}
+                onChange={handleSignUpChange}
+                required
+              />
               <button>Sign Up</button>
             </form>
           </div>
 
           {/* SignIn Container */}
           <div className="form-container sign-in-container">
-            <form action="#">
+            <form onSubmit={handleSingInSubmit}>
               <h1>Sign in</h1>
-              <div className="social-container">
-                <a href="1" className="social">
-                  <i className="fab fa-facebook-f"></i>
-                </a>
-                <a href="2" className="social">
-                  <i className="fab fa-google-plus-g"></i>
-                </a>
-                <a href="3" className="social">
-                  <i className="fab fa-linkedin-in"></i>
-                </a>
-              </div>
-              <span>or use your account</span>
-              <input type="email" placeholder="Email" required />
-              <input type="password" placeholder="Password" required />
+              <input
+                type="email"
+                placeholder="Email"
+                name="email"
+                required
+                value={email}
+                onChange={handleSignUpChange}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                required
+                name="password"
+                value={password}
+                onChange={handleSignUpChange}
+              />
               <a href="4">Forgot your password?</a>
               <button>Sign In</button>
             </form>
@@ -99,14 +118,28 @@ const LoginAndSignup = ({ setLoginClick }) => {
               <div className="overlay-panel overlay-left">
                 <h1>Welcome Back!</h1>
                 <p>To keep connected with us please login with your personal info</p>
-                <button onClick={() => setToggleSign(false)} className="ghost" id="signIn">
+                <button
+                  onClick={() => {
+                    setToggleSign(false);
+                    setSignUpData(signUpInitialState);
+                  }}
+                  className="ghost"
+                  id="signIn"
+                >
                   Sign In
                 </button>
               </div>
               <div className="overlay-panel overlay-right">
                 <h1>Hello, Friend!</h1>
                 <p>Enter your personal details and start journey with us</p>
-                <button onClick={() => setToggleSign(true)} className="ghost" id="signUp">
+                <button
+                  onClick={() => {
+                    setSignUpData(signUpInitialState);
+                    setToggleSign(true);
+                  }}
+                  className="ghost"
+                  id="signUp"
+                >
                   Sign Up
                 </button>
               </div>
