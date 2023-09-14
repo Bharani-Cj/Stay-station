@@ -3,12 +3,11 @@ import { Modal, Button } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
 import { useMutation } from "react-query";
 import { bookVisit } from "../../utils/api";
-import { toast } from "react-toastify";
 
 const BookingProperty = ({ setOpened, opened, propertyId, email }) => {
   const [dates, setDate] = useState(null);
 
-  const { mutate, isLoading } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: () => {
       bookVisit(email, propertyId, dates);
     },

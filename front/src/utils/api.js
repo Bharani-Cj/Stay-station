@@ -3,8 +3,8 @@ import { toast } from "react-toastify";
 import dayjs from "dayjs";
 
 const api = axios.create({
-  // baseURL: "https://stay-station.onrender.com",
-  baseURL: "http://127.0.0.1:5000",
+  baseURL: "https://stay-station.onrender.com",
+  // baseURL: "http://127.0.0.1:5000",
 });
 export const getAllProperties = async () => {
   try {
