@@ -33,17 +33,19 @@ const LoginAndSignup = ({ setLoginClick }) => {
   }
   // submitSignUp
   async function handleSignUpSubmit(e) {
+    toast.warn("Please wait until you signed up");
     e.preventDefault();
     const data = await signUp(signUpData);
-    if (!data.token) return toast.error("something went wrong");
+    if (!data?.token) return;
     setLoginClick(false);
     window.localStorage.setItem("user", data?.user.email);
   }
 
   async function handleSingInSubmit(e) {
+    toast.warn("Please wait until you logged in");
     e.preventDefault();
     const data = await signIn(signUpData);
-    if (!data.token) return toast.error("something went wrong");
+    if (!data?.token) return;
     setLoginClick(false);
     window.localStorage.setItem("user", data?.user.email);
   }
@@ -121,7 +123,7 @@ const LoginAndSignup = ({ setLoginClick }) => {
                 <button
                   onClick={() => {
                     setToggleSign(false);
-                    setSignUpData(signUpInitialState);
+                    // setSignUpData(signUpInitialState);
                   }}
                   className="ghost"
                   id="signIn"
@@ -134,7 +136,7 @@ const LoginAndSignup = ({ setLoginClick }) => {
                 <p>Enter your personal details and start journey with us</p>
                 <button
                   onClick={() => {
-                    setSignUpData(signUpInitialState);
+                    // setSignUpData(signUpInitialState);
                     setToggleSign(true);
                   }}
                   className="ghost"

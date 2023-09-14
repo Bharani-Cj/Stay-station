@@ -63,7 +63,7 @@ exports.logIn = catchAsync(async (req, res, next) => {
   const user = await userModel.findOne({ email });
 
   if (!user || !(await user.comparePassword(password, user.password)))
-    next(new APIError("Incorrect Email or Password", 401));
+    return next(new APIError("Incorrect Email or Password", 401));
 
   const token = jwtSign(user._id);
 

@@ -27,7 +27,7 @@ function App() {
           </Routes>
         </Suspense>
       </BrowserRouter>
-      <ToastContainer position="top-right" />
+      <ToastContainer position="top-right" autoClose={1500} />
     </QueryClientProvider>
   );
 }
