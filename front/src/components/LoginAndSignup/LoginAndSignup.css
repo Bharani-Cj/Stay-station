@@ -276,3 +276,9 @@ footer a {
    color: #3c97bf;
    text-decoration: none;
 }
+
+@media (max-width: 768px) {
+   .container {
+      scale: 0.5;
+   }
+}
