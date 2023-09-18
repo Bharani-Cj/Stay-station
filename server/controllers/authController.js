@@ -56,6 +56,9 @@ exports.signup = catchAsync(async (req, res, next) => {
 });
 
 exports.logIn = catchAsync(async (req, res, next) => {
+  const isTopLevelNavigation =
+    req.headers["referer"] === undefined || req.headers["origin"] === undefined;
+
   const { email, password } = req.body;
 
   if (!email || !password) next(new APIError("Please enter the Valid password", 400));
@@ -67,17 +70,16 @@ exports.logIn = catchAsync(async (req, res, next) => {
 
   const token = jwtSign(user._id);
 
-  res.cookie("jwt", token, {
-    expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
-    httpOnly: true,
-    secure: req.secure || req.headers["x-forwarded-proto"] === "https",
-  });
-
-  res.status(200).json({
-    status: "sucesses",
-    token,
-    user,
-  });
+  res
+    .status(200)
+    .cookie("jwt", token, {
+      maxAge: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
+      httpOnly: true,
+    })
+    .json({
+      token,
+      user,
+    });
 });
 
 exports.bookVisit = catchAsync(async (req, res, next) => {

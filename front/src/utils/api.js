@@ -1,10 +1,11 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import dayjs from "dayjs";
+axios.defaults.withCredentials = true;
 
 const api = axios.create({
-  baseURL: "https://stay-station.onrender.com",
-  // baseURL: "http://127.0.0.1:5000",
+  // baseURL: "https://stay-station.onrender.com",
+  baseURL: "http://127.0.0.1:5000",
 });
 export const getAllProperties = async () => {
   try {
@@ -34,7 +35,8 @@ export const signUp = async (data) => {
 };
 export const signIn = async (data) => {
   try {
-    const response = await api.post(`/api/v1/users/login`, data);
+    const response = await api.post(`/api/v1/users/login`, data, { withCredentials: true });
+
     return response.data;
   } catch (error) {
     toast.error(`${error.response.data.message}`);
